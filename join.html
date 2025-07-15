@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sell Yourself | DOMINA</title>
+  <style>
+   body {
+  background: url('bg-join.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+    .top-left {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      z-index: 999;
+    }
+
+    .logo-text {
+      font-size: 1rem;
+      color: #D9B991;
+      font-weight: bold;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .nav-icon {
+      width: 30px;
+      height: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      cursor: pointer;
+    }
+
+    .nav-icon span {
+      display: block;
+      height: 3px;
+      background-color: #D9B991;
+      border-radius: 2px;
+    }
+
+    .menu {
+      position: fixed;
+      top: 55px;
+      left: 20px;
+      background-color: rgba(64, 1, 6, 0.95);
+      border-radius: 10px;
+      padding: 1rem;
+      display: none;
+      flex-direction: column;
+      gap: 0.5rem;
+      box-shadow: 0 0 15px #260101aa;
+      z-index: 998;
+    }
+
+    .menu a {
+      color: #D9B991;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: 0.2s;
+    }
+
+    .menu a:hover {
+      color: #ffffff;
+      text-shadow: 0 0 5px #D9B991;
+    }
+
+    .form-container {
+      background: rgba(38, 1, 1, 0.85);
+      padding: 2rem 3rem;
+      border-radius: 10px;
+      width: 350px;
+      color: #D9B991;
+      box-shadow: 0 0 25px #402814;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      color: #D9B991;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 0.6rem;
+      margin-bottom: 1rem;
+      background-color: #0D0C00;
+      border: 1px solid #D9B991;
+      border-radius: 5px;
+      color: #D9B991;
+    }
+
+    .error {
+      color: #D9B991;
+      background-color: #400106;
+      padding: 0.5rem;
+      margin-bottom: 1rem;
+      border-radius: 5px;
+      display: none;
+      font-size: 0.85rem;
+      text-align: center;
+    }
+
+    button {
+      width: 100%;
+      padding: 0.8rem;
+      background-color: #D9B991;
+      color: #400106;
+      font-weight: bold;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #402814;
+      color: #D9B991;
+    }
+  </style>
+
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById("menu");
+      menu.style.display = (menu.style.display === "flex") ? "none" : "flex";
+    }
+
+    function validateForm(event) {
+      event.preventDefault();
+      const age = document.getElementById("age").value;
+      const whatsapp = document.getElementById("whatsapp").value;
+      const phonePattern = /^\+?\d{9,15}$/;
+      const error = document.getElementById("error-message");
+
+      if (age < 18) {
+        error.textContent = "You must be at least 18.";
+        error.style.display = "block";
+        return false;
+      }
+
+      if (!phonePattern.test(whatsapp)) {
+        error.textContent = "Invalid WhatsApp number. It must be 9 to 15 digits.";
+        error.style.display = "block";
+        return false;
+      }
+
+      // Hide error if all is valid
+      error.style.display = "none";
+      window.location.href = "thankyou.html";
+      return true;
+    }
+  </script>
+</head>
+<body>
+
+  <!-- Logo + Hamburger -->
+  <div class="top-left">
+    <div class="logo-text" onclick="location.href='index.html'">DOMINA</div>
+    <div class="nav-icon" onclick="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+
+  <!-- Floating Menu -->
+  <div id="menu" class="menu">
+    <a href="index.html">Main</a>
+    <a href="join.html">Sell Yourself</a>
+    <a href="about.html">About</a>
+  </div>
+
+  <!-- Form -->
+  <div class="form-container">
+    <h2>Sell Yourself</h2>
+    <form onsubmit="validateForm(event)">
+      <label for="name">Nom (Name)</label>
+      <input type="text" id="name" name="name" required maxlength="25" />
+
+      <label for="age">Âge (Age)</label>
+      <input type="number" id="age" name="age" min="18" required />
+
+      <label for="kink">Sexual Kinks</label>
+      <select id="kink" name="kink" required>
+        <option value="submissive">Submissive</option>
+      </select>
+
+      <label for="description">Description (Optional)</label>
+      <textarea id="description" name="description" maxlength="200" rows="3"></textarea>
+
+      <label for="whatsapp">WhatsApp</label>
+      <input type="tel" id="whatsapp" name="whatsapp" required />
+
+      <div id="error-message" class="error"></div>
+
+      <button type="submit">Submit to DOMINA</button>
+    </form>
+  </div>
+</body>
+</html>
